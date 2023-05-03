@@ -108,7 +108,7 @@ class _LoginFormState extends State<LoginForm> {
               color: kaccentGold,
               minWidth: 350,
               height: 60,
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -144,7 +144,7 @@ class _LoginFormState extends State<LoginForm> {
               color: const Color.fromARGB(255, 0, 0, 0),
               minWidth: 350,
               height: 60,
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [

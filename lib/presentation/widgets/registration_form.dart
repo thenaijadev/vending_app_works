@@ -129,7 +129,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
               color: kaccentGold,
               minWidth: 350,
               height: 60,
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -165,7 +165,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
               color: const Color.fromARGB(255, 0, 0, 0),
               minWidth: 350,
               height: 60,
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [

@@ -16,7 +16,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return SafeArea(
       child: BlocProvider(
         create: (context) => RegistrationFormBloc(),
-        child: const Scaffold(
+        child: Scaffold(
           resizeToAvoidBottomInset: true,
           body: SingleChildScrollView(
             child: Column(
