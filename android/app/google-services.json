@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "456996745091",
+    "project_id": "vending-app-dynamic-link",
+    "storage_bucket": "vending-app-dynamic-link.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456996745091:android:e10937ee392a48316f10b6",
+        "android_client_info": {
+          "package_name": "com.example.vending_app_poc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456996745091-a3f5eked4jvm9au03q72jeb9qtca9p03.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDo4yUtVWeVD_FkkkkjiaL4vnyXZgmbaY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456996745091-a3f5eked4jvm9au03q72jeb9qtca9p03.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
