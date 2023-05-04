@@ -3,6 +3,9 @@ import 'package:vending_app_poc/bloc/uri_bloc.dart';
 import '../widgets/custom_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/buttom_sheet_widget.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'dart:developer';
+import '../../utilities/services/dynamic_link_provider.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key, required this.title});
@@ -14,9 +17,23 @@ class AdminScreen extends StatefulWidget {
 }
 
 class _AdminScreenState extends State<AdminScreen> {
+  String dynamicLink = "";
+  @override
+  void initState() {
+    FirebaseDynamicLinks.instance.onLink.listen((dynamicLinkData) {
+      log(dynamicLinkData.link.path);
+    }).onError((error) {
+      // Handle errors
+    });
+    super.initState();
+  }
+
+  String link = "";
   @override
   Widget build(BuildContext context) {
     String? urlString;
+    String parameter = "";
+    String initialLink = "";
     final uriBlock = BlocProvider.of<UriBloc>(context);
 
     void showSheet(int index, BuildContext context) {
@@ -117,6 +134,36 @@ class _AdminScreenState extends State<AdminScreen> {
                   onPressed: () {
                     showSheet(2, context);
                   },
+                ),
+                TextField(
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    parameter = value;
+                  },
+                ),
+                CustomButton(
+                  label: "Create launch Link",
+                  onPressed: () async {
+                    DynamicLinksProvider.createLinks(parameter).then((value) {
+                      setState(() {
+                        link = value;
+                      });
+                      log("This is the link: $link");
+                    });
+                  },
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SelectableText(
+                  link,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold),
+                  cursorColor: Colors.red,
+                  showCursor: true,
                 )
               ],
             ),
