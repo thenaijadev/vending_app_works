@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vending_app_poc/bloc/uri_bloc.dart';
+import 'package:vending_app_poc/presentation/constants/constants.dart';
 import '../widgets/custom_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/buttom_sheet_widget.dart';
@@ -86,16 +87,16 @@ class _AdminScreenState extends State<AdminScreen> {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.grey,
+            backgroundColor: kaccentGold,
             centerTitle: true,
             title: Text(
               widget.title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.white),
             ),
           ),
-          body: Center(
+          body: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Padding(
                   padding: EdgeInsets.all(12.0),
@@ -111,29 +112,54 @@ class _AdminScreenState extends State<AdminScreen> {
                     style: TextStyle(fontSize: 15),
                   ),
                 ),
-                CustomButton(
-                  label: "Buy Stock",
-                  onPressed: () {
-                    showSheet(0, context);
-                  },
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListTile(
+                    textColor: Colors.white,
+                    tileColor: const Color.fromARGB(255, 3, 60, 159),
+                    onTap: () async {
+                      showSheet(0, context);
+                    },
+                    title: const Text(
+                      "Buy Stock",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListTile(
+                    textColor: Colors.white,
+                    tileColor: const Color.fromARGB(255, 3, 60, 159),
+                    onTap: () async {
+                      showSheet(1, context);
+                    },
+                    title: const Text(
+                      "Request For Credit",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListTile(
+                    textColor: Colors.white,
+                    tileColor: const Color.fromARGB(255, 3, 60, 159),
+                    onTap: () async {
+                      showSheet(1, context);
+                    },
+                    title: const Text(
+                      "Agent Services",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
-                CustomButton(
-                  label: "Request For Credit",
-                  onPressed: () {
-                    showSheet(1, context);
-                  },
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                CustomButton(
-                  label: "Agent Services",
-                  onPressed: () {
-                    showSheet(2, context);
-                  },
+                const Text(
+                  "Create dynamic link",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 TextField(
                   textAlign: TextAlign.center,
@@ -142,14 +168,9 @@ class _AdminScreenState extends State<AdminScreen> {
                   },
                 ),
                 CustomButton(
-                  label: "Create launch Link",
+                  label: "Create",
                   onPressed: () async {
-                    DynamicLinksProvider.createLinks(parameter).then((value) {
-                      setState(() {
-                        link = value;
-                      });
-                      log("This is the link: $link");
-                    });
+                    displayParameters(parameter);
                   },
                 ),
                 const SizedBox(
@@ -169,5 +190,14 @@ class _AdminScreenState extends State<AdminScreen> {
             ),
           )),
     );
+  }
+
+  void displayParameters(String parameter) {
+    DynamicLinksProvider.createLinks(parameter).then((value) {
+      setState(() {
+        link = value;
+      });
+      log("This is the link: $link");
+    });
   }
 }

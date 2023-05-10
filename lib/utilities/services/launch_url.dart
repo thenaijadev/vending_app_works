@@ -5,13 +5,12 @@ class URLlauncher {
     required this.urlLink,
   });
   final String urlLink;
-
   Uri get _url {
     return Uri.parse(urlLink);
   }
 
   Future<void> launch() async {
-    if (!await launchUrl(_url)) {
+    if (!await launchUrl(_url, mode: LaunchMode.externalApplication)) {
       throw Exception('Could not launch $_url');
     }
   }

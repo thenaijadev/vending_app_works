@@ -20,18 +20,45 @@ class DynamicLinksProvider {
     return refLink.shortUrl.toString();
   }
 
-  static Future<String> initDynamicLink() async {
-    final instanceLink = await FirebaseDynamicLinks.instance.getInitialLink();
-    if (instanceLink != null) {
-      final Uri refLink = instanceLink.link;
-      if (refLink.queryParameters.containsKey("params")) {
-        return "This is the link: ${refLink.queryParameters["params"]}";
-      }
-      log("isnotnull");
-    } else {
-      return "no link";
+  // static Future<String> initDynamicLink() async {
+  //   final instanceLink = await FirebaseDynamicLinks.instance.getInitialLink();
+  //   if (instanceLink != null) {
+  //     final Uri refLink = instanceLink.link;
+  //     if (refLink.queryParameters.containsKey("params")) {
+  //       return "This is the link: ${refLink.queryParameters["params"]}";
+  //     }
+  //     log("isnotnull");
+  //   } else {
+  //     return "no link";
+  //   }
+
+  //   return instanceLink.toString();
+  // }
+
+  static Future<String> getPassedParameters() async {
+    // await DynamicLinksProvider.createLinks("");
+    final PendingDynamicLinkData? initialLink =
+        await FirebaseDynamicLinks.instance.getInitialLink();
+
+    // if (initialLink != null) {
+    //   final Uri deepLink = initialLink.link;
+
+    //   // Example of using the dynamic link to push the user to a different screen
+    // }
+
+    // Uri? deepLink;
+    // FirebaseDynamicLinks.instance.onLink.listen(
+    //   (pendingDynamicLinkData) {
+    //     deepLink = pendingDynamicLinkData.link;
+    //   },
+    // );
+
+    String theLink = "link Here";
+    if (initialLink != null) {
+      theLink = initialLink.link.toString();
+      return theLink;
     }
 
-    return instanceLink.toString();
+    return null.toString();
   }
 }

@@ -16,38 +16,36 @@ class _UserScreenState extends State<UserScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.grey,
+          backgroundColor: const Color.fromARGB(255, 3, 60, 159),
           title: const Text(
-            "User Screen",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            "What action do you want to take",
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
-        body: Center(
-          child: BlocBuilder<UriBloc, UriState>(
-            builder: (context, state) {
-              if (state is UriInitial) {
-                final link_1 = state.getLinks[0];
-                final link_2 = state.getLinks[1];
-                final link_3 = state.getLinks[2];
-                return ButtonColumn(
-                  link_1: link_1,
-                  link_2: link_2,
-                  link_3: link_3,
-                );
-              } else if (state is NewUriState) {
-                final link_1 = state.getLinks[0];
-                final link_2 = state.getLinks[1];
-                final link_3 = state.getLinks[2];
-                return ButtonColumn(
-                  link_1: link_1,
-                  link_2: link_2,
-                  link_3: link_3,
-                );
-              } else {
-                return Container();
-              }
-            },
-          ),
+        body: BlocBuilder<UriBloc, UriState>(
+          builder: (context, state) {
+            if (state is UriInitial) {
+              final link_1 = state.getLinks[0];
+              final link_2 = state.getLinks[1];
+              final link_3 = state.getLinks[2];
+              return ButtonColumn(
+                link_1: link_1,
+                link_2: link_2,
+                link_3: link_3,
+              );
+            } else if (state is NewUriState) {
+              final link_1 = state.getLinks[0];
+              final link_2 = state.getLinks[1];
+              final link_3 = state.getLinks[2];
+              return ButtonColumn(
+                link_1: link_1,
+                link_2: link_2,
+                link_3: link_3,
+              );
+            } else {
+              return Container();
+            }
+          },
         ),
       ),
     );

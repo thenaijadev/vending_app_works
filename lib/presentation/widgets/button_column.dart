@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import "./custom_button.dart";
 import '../../../utilities/services/launch_url.dart';
+import 'package:external_app_launcher/external_app_launcher.dart';
 
 class ButtonColumn extends StatelessWidget {
   const ButtonColumn({
@@ -17,42 +17,73 @@ class ButtonColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Padding(
-          padding: EdgeInsets.all(12.0),
-          child: Text(
-            "What action do you want to take",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListTile(
+            textColor: Colors.white,
+            tileColor: const Color.fromARGB(255, 3, 60, 159),
+            onTap: () async {
+              final URLlauncher launcher = URLlauncher(urlLink: link_1);
+              await launcher.launch();
+            },
+            title: const Text(
+              "Buy Stock",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
         ),
-        CustomButton(
-          label: "Buy Stock",
-          onPressed: () async {
-            final URLlauncher launcher = URLlauncher(urlLink: link_1);
-            await launcher.launch();
-          },
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListTile(
+            textColor: Colors.white,
+            tileColor: const Color.fromARGB(255, 3, 60, 159),
+            onTap: () async {
+              final URLlauncher launcher = URLlauncher(urlLink: link_2);
+              await launcher.launch();
+            },
+            title: const Text(
+              "Request For Credit",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListTile(
+            textColor: Colors.white,
+            tileColor: const Color.fromARGB(255, 3, 60, 159),
+            onTap: () async {
+              final URLlauncher launcher = URLlauncher(urlLink: link_3);
+              await launcher.launch();
+            },
+            title: const Text(
+              "Agent Services",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListTile(
+            textColor: Colors.white,
+            tileColor: const Color.fromARGB(255, 3, 60, 159),
+            onTap: () async {
+              await LaunchApp.isAppInstalled(
+                  androidPackageName: 'team.opay.pay.merchant.service');
+              await LaunchApp.openApp(
+                androidPackageName: 'team.opay.pay.merchant.service',
+              );
+            },
+            title: const Text(
+              "Launch Opay",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
         ),
         const SizedBox(
           height: 30,
         ),
-        CustomButton(
-          label: "Request For Credit",
-          onPressed: () async {
-            final URLlauncher launcher = URLlauncher(urlLink: link_2);
-            await launcher.launch();
-          },
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        CustomButton(
-          label: "Agent Services",
-          onPressed: () async {
-            final URLlauncher launcher = URLlauncher(urlLink: link_3);
-            await launcher.launch();
-          },
-        )
       ],
     );
   }

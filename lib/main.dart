@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:vending_app_poc/bloc/uri_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:vending_app_poc/utilities/services/dynamic_link_provider.dart';
 import './utilities/firebase_options.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import './utilities/app_router.dart';
 
 Future<void> main() async {
@@ -12,28 +12,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // await DynamicLinksProvider.createLinks("");
-  final PendingDynamicLinkData? initialLink =
-      await FirebaseDynamicLinks.instance.getInitialLink();
 
-  if (initialLink != null) {
-    final Uri deepLink = initialLink.link;
-
-    // Example of using the dynamic link to push the user to a different screen
-  }
-
-  Uri? deepLink;
-  FirebaseDynamicLinks.instance.onLink.listen(
-    (pendingDynamicLinkData) {
-      deepLink = pendingDynamicLinkData.link;
-    },
-  );
-
-  String theLink = "link Here";
-  if (initialLink != null) {
-    theLink = initialLink.link.toString();
-  }
-
+  final String theLink = await DynamicLinksProvider.getPassedParameters();
   runApp(MyApp(initialLink: theLink));
 }
 
