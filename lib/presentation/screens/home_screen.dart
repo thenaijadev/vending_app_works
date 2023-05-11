@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vending_app_poc/presentation/constants/constants.dart';
+import 'package:vending_app_poc/presentation/widgets/path_choice.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,51 +14,74 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: kaccentGold,
-          elevation: 2,
-          title: const Text(
-            "Are you an Admin or User?",
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 255, 255, 255)),
+        body: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                'assets/images/home_alt.jpg',
+              ),
+              fit: BoxFit.cover,
+            ),
           ),
-          centerTitle: true,
-        ),
-        body: Column(
-          children: [
-            const SizedBox(
-              height: 40,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                textColor: Colors.white,
-                tileColor: const Color.fromARGB(255, 3, 60, 159),
-                onTap: () {
-                  Navigator.pushNamed(context, "/admin");
-                },
-                title: const Text(
-                  "Administrator",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                height: 350,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.transparent,
+                      Colors.black,
+                      Colors.black,
+                      Colors.black,
+                      Colors.black,
+                    ],
+                    stops: [0, 0.5, 0, 0.4, 0],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "Welcome",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    AuthButtons(
+                      backgroundColor: kaccentGold,
+                      color: Colors.white,
+                      label: 'User',
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/user");
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    AuthButtons(
+                      backgroundColor: Colors.white,
+                      color: kaccentGold,
+                      label: 'Admin',
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/admin");
+                      },
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                  ],
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                textColor: Colors.white,
-                tileColor: const Color.fromARGB(255, 3, 60, 159),
-                onTap: () {
-                  Navigator.pushNamed(context, "/user");
-                },
-                title: const Text(
-                  "Customer",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

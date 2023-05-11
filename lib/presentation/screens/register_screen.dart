@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vending_app_poc/bloc/registration_bloc.dart/bloc/registration_form_bloc.dart';
-import '../widgets/registration_form.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import '../constants/constants.dart';
+import '../widgets/path_choice.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -26,53 +25,74 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: BlocProvider(
-        create: (context) => RegistrationFormBloc(),
-        child: Scaffold(
-          resizeToAvoidBottomInset: true,
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 25.0, vertical: 20),
-                  child: Row(
-                    children: const [
-                      Icon(
-                        Icons.location_on_outlined,
-                        size: 25,
-                      ),
-                      Text(
-                        " Lagos, Nigeria. ",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20),
-                  child: Text(
-                    "Get Started",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30.0),
-                  child: Text(
-                    "Create an account to continue!",
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 137, 137, 137),
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30.0),
-                  child: RegistrationForm(),
-                )
-              ],
+      child: Scaffold(
+        body: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                'assets/images/home_alt.jpg',
+              ),
+              fit: BoxFit.cover,
             ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                height: 350,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.transparent,
+                      Colors.black,
+                      Colors.black,
+                      Colors.black,
+                      Colors.black,
+                    ],
+                    stops: [0, 0.5, 0, 0.4, 0],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "Welcome",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    AuthButtons(
+                      backgroundColor: kaccentGold,
+                      color: Colors.white,
+                      label: 'User',
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/user");
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    AuthButtons(
+                      backgroundColor: Colors.white,
+                      color: kaccentGold,
+                      label: 'Admin',
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/admin");
+                      },
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
