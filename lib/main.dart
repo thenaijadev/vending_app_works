@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:vending_app_poc/utilities/services/dynamic_link_provider.dart';
 import './utilities/firebase_options.dart';
 import './utilities/app_router.dart';
+import './bloc/bloc/stocks_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,8 +30,15 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    return BlocProvider<UriBloc>(
-      create: (context) => UriBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<UriBloc>(
+          create: (context) => UriBloc(),
+        ),
+        BlocProvider<StocksBloc>(
+          create: (context) => StocksBloc(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
