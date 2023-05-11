@@ -4,6 +4,7 @@ import 'package:vending_app_poc/data/providers/buy_stock_transaction_provider.da
 import 'package:vending_app_poc/presentation/constants/constants.dart';
 import "package:flutter_bloc/flutter_bloc.dart";
 import 'dart:async';
+import '../../utilities/services/launch_url.dart';
 
 class LinkScreen extends StatefulWidget {
   const LinkScreen({super.key, required this.initialLink});
@@ -175,7 +176,71 @@ class _LinkScreenState extends State<LinkScreen> {
                                 ),
                               ),
                               GestureDetector(
-                                onTap: () async {},
+                                onTap: () async {
+                                  setState(() {
+                                    isLoading = true;
+                                  });
+                                  try {
+                                    await BuyStockTransactionProvider
+                                        .updateTransactionStatus(state
+                                            .getTransaction.transactionId!);
+                                    showModalBottomSheet(
+                                        context: context,
+                                        builder: (context) {
+                                          return Container(
+                                            color: kaccentGold,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                const Center(
+                                                  child: Text(
+                                                      "Payment Successfull",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 25)),
+                                                ),
+                                                const SizedBox(
+                                                  height: 20,
+                                                ),
+                                                Container(
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                      color: Colors.green),
+                                                  child: TextButton(
+                                                    onPressed: () async {
+                                                      final URLlauncher
+                                                          launcher =
+                                                          URLlauncher(
+                                                              urlLink:
+                                                                  "https://payment.nubiaville.com/");
+                                                      await launcher.launch();
+                                                    },
+                                                    child: const Text(
+                                                        "View History",
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 15)),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        });
+                                  } catch (e) {
+                                    print(e);
+                                  }
+                                  setState(() {
+                                    isLoading = false;
+                                  });
+                                },
                                 child: Center(
                                   child: Container(
                                     height: 50,

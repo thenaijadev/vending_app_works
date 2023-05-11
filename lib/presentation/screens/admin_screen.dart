@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vending_app_poc/presentation/widgets/path_choice.dart';
 import 'package:vending_app_poc/bloc/uri_bloc.dart';
 import 'package:vending_app_poc/presentation/constants/constants.dart';
 import '../widgets/custom_button.dart';
@@ -86,86 +87,107 @@ class _AdminScreenState extends State<AdminScreen> {
 
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: kaccentGold,
-            centerTitle: true,
-            title: Text(
-              widget.title,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.white),
+        backgroundColor: kaccentGold,
+        appBar: AppBar(
+          backgroundColor: kaccentGold,
+          centerTitle: true,
+          title: Text(
+            widget.title,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+        ),
+        body: Container(
+          height: double.infinity,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.transparent,
+                Colors.black,
+                Colors.black,
+                Colors.black,
+                Colors.black,
+              ],
+              stops: [0, 0.5, 0, 0.4, 0],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
             ),
           ),
-          body: SingleChildScrollView(
+          child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
                 const Padding(
                   padding: EdgeInsets.all(12.0),
                   child: Text(
                     'Change action links.',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.white),
                   ),
                 ),
                 const Padding(
                   padding: EdgeInsets.all(12.0),
                   child: Text(
                     "Choose a button to change it's action link",
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(fontSize: 15, color: Colors.white),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    textColor: Colors.white,
-                    tileColor: const Color.fromARGB(255, 3, 60, 159),
-                    onTap: () async {
+                AuthButtons(
+                    onPressed: () async {
                       showSheet(0, context);
                     },
-                    title: const Text(
-                      "Buy Stock",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    textColor: Colors.white,
-                    tileColor: const Color.fromARGB(255, 3, 60, 159),
-                    onTap: () async {
-                      showSheet(1, context);
-                    },
-                    title: const Text(
-                      "Request For Credit",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    textColor: Colors.white,
-                    tileColor: const Color.fromARGB(255, 3, 60, 159),
-                    onTap: () async {
-                      showSheet(1, context);
-                    },
-                    title: const Text(
-                      "Agent Services",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
+                    label: "Buy Stock",
+                    color: Colors.white,
+                    backgroundColor: kaccentGold),
                 const SizedBox(
-                  height: 30,
+                  height: 60,
+                ),
+                AuthButtons(
+                    onPressed: () async {
+                      showSheet(1, context);
+                    },
+                    label: "Request For Credit",
+                    color: Colors.white,
+                    backgroundColor: kaccentGold),
+                const SizedBox(
+                  height: 60,
+                ),
+                AuthButtons(
+                    onPressed: () async {
+                      showSheet(2, context);
+                    },
+                    label: "Agent Services",
+                    color: Colors.white,
+                    backgroundColor: kaccentGold),
+                const SizedBox(
+                  height: 60,
                 ),
                 const Text(
                   "Create dynamic link",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
-                TextField(
-                  textAlign: TextAlign.center,
-                  onChanged: (value) {
-                    parameter = value;
-                  },
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      focusColor: kaccentGold,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onChanged: (value) {
+                      parameter = value;
+                    },
+                  ),
                 ),
                 CustomButton(
                   label: "Create",
@@ -188,7 +210,9 @@ class _AdminScreenState extends State<AdminScreen> {
                 )
               ],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 

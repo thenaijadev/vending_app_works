@@ -15,6 +15,7 @@ Future<void> main() async {
   );
 
   final String theLink = await DynamicLinksProvider.getPassedParameters();
+
   runApp(MyApp(initialLink: theLink));
 }
 
