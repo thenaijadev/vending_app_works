@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vending_app_poc/presentation/constants/constants.dart';
+import 'package:vending_app_poc/presentation/widgets/path_choice.dart';
 import '../../../utilities/services/launch_url.dart';
 import 'package:external_app_launcher/external_app_launcher.dart';
 
@@ -17,70 +19,43 @@ class ButtonColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListTile(
-            textColor: Colors.white,
-            tileColor: const Color.fromARGB(255, 3, 60, 159),
-            onTap: () async {
+        AuthButtons(
+            onPressed: () async {
               final URLlauncher launcher = URLlauncher(urlLink: link_1);
               await launcher.launch();
             },
-            title: const Text(
-              "Buy Stock",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListTile(
-            textColor: Colors.white,
-            tileColor: const Color.fromARGB(255, 3, 60, 159),
-            onTap: () async {
+            label: "Buy Stock",
+            color: Colors.white,
+            backgroundColor: kaccentGold),
+        AuthButtons(
+            onPressed: () async {
               final URLlauncher launcher = URLlauncher(urlLink: link_2);
               await launcher.launch();
             },
-            title: const Text(
-              "Request For Credit",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListTile(
-            textColor: Colors.white,
-            tileColor: const Color.fromARGB(255, 3, 60, 159),
-            onTap: () async {
+            label: "Request For Credit",
+            color: Colors.white,
+            backgroundColor: kaccentGold),
+        AuthButtons(
+            onPressed: () async {
               final URLlauncher launcher = URLlauncher(urlLink: link_3);
               await launcher.launch();
             },
-            title: const Text(
-              "Agent Services",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListTile(
-            textColor: Colors.white,
-            tileColor: const Color.fromARGB(255, 3, 60, 159),
-            onTap: () async {
+            label: "Agent Service",
+            color: Colors.white,
+            backgroundColor: kaccentGold),
+        AuthButtons(
+            onPressed: () async {
               await LaunchApp.isAppInstalled(
                   androidPackageName: 'team.opay.pay.merchant.service');
               await LaunchApp.openApp(
                 androidPackageName: 'team.opay.pay.merchant.service',
               );
             },
-            title: const Text(
-              "Launch Opay",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
+            label: "Launch Opay",
+            color: Colors.white,
+            backgroundColor: kaccentGold),
         const SizedBox(
           height: 30,
         ),
